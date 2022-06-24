@@ -85,7 +85,7 @@ func getMovies(writer http.ResponseWriter, reader *http.Request) {
 }
 
 func getMovie(writer http.ResponseWriter, reader *http.Request) {
-	log.Println("Endpoint hit: /movies/{movieid}")
+	log.Println("Endpoint hit: /getmovie/{movieid}")
 	// Get the map of route variables from the reader
 	params := mux.Vars(reader)
 
@@ -95,7 +95,7 @@ func getMovie(writer http.ResponseWriter, reader *http.Request) {
 
 	// movieID must be provided
 	if movieID == "" {
-		response = JsonResponse{Type: "error", Message: "You are missing the movieID parameter."}
+		response = JsonResponse{Type: "error", Message: "You are missing the movieid parameter."}
 	} else {
 		db := setupDB()
 		printMessage("Getting movie from DB")
@@ -112,7 +112,7 @@ func getMovie(writer http.ResponseWriter, reader *http.Request) {
 		err := row.Scan(&id, &movieID, &movieName)
 
 		if err != nil {
-			response = JsonResponse{Type: "failed", Message: "A movie with that movieid does not exist."}
+			response = JsonResponse{Type: "failure", Message: "A movie with that movieid does not exist."}
 		} else {
 			movies = append(movies, Movie{MovieID: movieID, MovieName: movieName})
 
@@ -163,7 +163,7 @@ func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 
 	// movieID must be provided
 	if movieID == "" {
-		response = JsonResponse{Type: "error", Message: "You are missing the movieID parameter."}
+		response = JsonResponse{Type: "error", Message: "You are missing the movieid parameter."}
 	} else {
 		db := setupDB()
 		printMessage("Deleting movie from DB")
@@ -171,9 +171,11 @@ func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 		// Execute the query but don't return any rows
 		_, err := db.Exec("DELETE FROM movies WHERE movieid = $1", movieID)
 
-		checkErr(err)
-
-		response = JsonResponse{Type: "success", Message: "The movie has been deleted successfully."}
+		if err != nil {
+			response = JsonResponse{Type: "failure", Message: "Failed to delete the specified movie."}
+		} else {
+			response = JsonResponse{Type: "success", Message: "The movie has been deleted successfully."}
+		}
 	}
 
 	json.NewEncoder(writer).Encode(response)
@@ -207,7 +209,7 @@ func main() {
 	router.HandleFunc("/movies", getMovies).Methods("GET")
 
 	// Get a specific movie by the movieID
-	router.HandleFunc("/movies/{movieid}", getMovie).Methods("GET")
+	router.HandleFunc("/getmovie/{movieid}", getMovie).Methods("GET")
 
 	// Create a movie
 	router.HandleFunc("/addmovie", createMovie).Methods("POST")
