@@ -33,7 +33,7 @@ func setupDB() *sql.DB {
 	}
 
 	fmt.Println("Setting up DB")
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s port=%s sslmode=disable\n", os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("PORT"))
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s port=%s sslmode=disable", os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("PORT"))
 	db, err := sql.Open("postgres", dbinfo)
 
 	checkErr(err)
@@ -127,25 +127,24 @@ func getMovie(writer http.ResponseWriter, reader *http.Request) {
 func createMovie(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /addmovie")
 
-	err := reader.ParseForm()
-	checkErr(err)
-
-	movieID := reader.FormValue("movieid")
-	movieName := reader.FormValue("moviename")
+	var m Movie
+	decoder := json.NewDecoder(reader.Body)
+	if err := decoder.Decode(&m); err != nil {
+		return
+	}
 
 	var response = JsonResponse{}
 	// movieID and movieName must both be provided
-	if movieID == "" || movieName == "" {
-		log.Println("Bad")
+	if m.MovieID == "" || m.MovieName == "" {
 		response = JsonResponse{Type: "error", Message: "You are missing movieID or movieName"}
 	} else {
 		// Setup the DB and insert a new record
 		db := setupDB()
 		printMessage("Inserting movie into DB")
-		fmt.Printf("Inserting new movie with ID %s and name %s\n", movieID, movieName)
+		fmt.Printf("Inserting new movie with ID %s and name %s\n", m.MovieID, m.MovieName)
 		var lastInsertID int
 		// Execute the query and get the first (and only) row
-		err := db.QueryRow("INSERT INTO movies(movieid, moviename) VALUES($1, $2)", movieID, movieName).Scan(&lastInsertID)
+		err := db.QueryRow("INSERT INTO movies(movieid, moviename) VALUES($1, $2) RETURNING id", m.MovieID, m.MovieName).Scan(&lastInsertID)
 		checkErr(err)
 		response = JsonResponse{Type: "success", Message: "The movie has been inserted successfully!"}
 	}
@@ -200,25 +199,25 @@ func deleteAllMovies(writer http.ResponseWriter, reader *http.Request) {
 
 func main() {
 
-	// Init the mux router
+	// Initialize the mux router
 	router := mux.NewRouter().StrictSlash(true)
 
 	// Route handles & endpoints
 
 	// Get all movies
-	router.HandleFunc("/movies", getMovies).Methods("GET")
+	router.HandleFunc("/movies/", getMovies).Methods("GET")
 
 	// Get a specific movie by the movieID
-	router.HandleFunc("/getmovie/{movieid}", getMovie).Methods("GET")
+	router.HandleFunc("/getmovie/{movieid}/", getMovie).Methods("GET")
 
 	// Create a movie
-	router.HandleFunc("/addmovie", createMovie).Methods("POST")
+	router.HandleFunc("/addmovie/", createMovie).Methods("POST")
 
 	// Delete a specific movie by the movieID
-	router.HandleFunc("/deletemovie/{movieid}", deleteMovie).Methods("DELETE")
+	router.HandleFunc("/deletemovie/{movieid}/", deleteMovie).Methods("DELETE")
 
 	// Delete all movies
-	router.HandleFunc("/deletemovies", deleteAllMovies).Methods("DELETE")
+	router.HandleFunc("/deletemovies/", deleteAllMovies).Methods("DELETE")
 
 	// Serve the app
 	fmt.Println("Server at 8080")
