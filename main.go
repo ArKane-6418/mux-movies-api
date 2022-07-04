@@ -8,11 +8,11 @@ import (
 	"net/http"
 	"os"
 
+	_ "github.com/ArKane-6418/mux-movies-api/docs"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	httpSwagger "github.com/swaggo/http-swagger"
-	_ "github.com/swaggo/http-swagger/example/gorilla/docs"
 )
 
 // @title Golang Mux Movies API
