@@ -1,0 +1,230 @@
+basePath: /
+definitions:
+  main.JsonResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/main.Movie'
+        type: array
+      message:
+        type: string
+      type:
+        type: string
+    type: object
+  main.Movie:
+    properties:
+      movieid:
+        type: string
+      moviename:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: Joshua Ong
+    url: http://www.swagger.io/support
+  description: This is a movies API server
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Golang Mux Movies API
+  version: "1.0"
+paths:
+  /addmovie/:
+    post:
+      consumes:
+      - application/json
+      description: Create new movie based on parameter
+      parameters:
+      - description: Movie Data
+        in: body
+        name: movie
+        required: true
+        schema:
+          $ref: '#/definitions/main.Movie'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JsonResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Movie'
+                  type: array
+                message:
+                  type: string
+                type:
+                  type: string
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JsonResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Movie'
+                  type: array
+                message:
+                  type: string
+                type:
+                  type: string
+              type: object
+  /deletemovie/{movieid}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete movie based on movieid
+      parameters:
+      - description: Movie ID
+        in: path
+        name: movieid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JsonResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Movie'
+                  type: array
+                message:
+                  type: string
+                type:
+                  type: string
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JsonResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Movie'
+                  type: array
+                message:
+                  type: string
+                type:
+                  type: string
+              type: object
+  /deletemovies/:
+    delete:
+      consumes:
+      - application/json
+      description: Delete all movies from database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JsonResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Movie'
+                  type: array
+                message:
+                  type: string
+                type:
+                  type: string
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JsonResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Movie'
+                  type: array
+                message:
+                  type: string
+                type:
+                  type: string
+              type: object
+  /getmovie/{movieid}/:
+    get:
+      consumes:
+      - application/json
+      description: Get a movie by its movieid
+      parameters:
+      - description: Movie ID
+        in: path
+        name: movieid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JsonResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Movie'
+                  type: array
+                message:
+                  type: string
+                type:
+                  type: string
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JsonResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Movie'
+                  type: array
+                message:
+                  type: string
+                type:
+                  type: string
+              type: object
+  /movies/:
+    get:
+      consumes:
+      - application/json
+      description: Get all movies from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JsonResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Movie'
+                  type: array
+                message:
+                  type: string
+                type:
+                  type: string
+              type: object
+schemes:
+- http
+swagger: "2.0"
