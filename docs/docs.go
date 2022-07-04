@@ -105,9 +105,6 @@ const docTemplate = `{
         "/deletemovie/{movieid}": {
             "delete": {
                 "description": "Delete movie based on movieid",
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],
@@ -181,9 +178,6 @@ const docTemplate = `{
         "/deletemovies/": {
             "delete": {
                 "description": "Delete all movies from database",
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],
@@ -248,9 +242,6 @@ const docTemplate = `{
         "/getmovie/{movieid}/": {
             "get": {
                 "description": "Get a movie by its movieid",
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],
@@ -324,9 +315,6 @@ const docTemplate = `{
         "/movies/": {
             "get": {
                 "description": "Get all movies from the database",
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],

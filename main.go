@@ -74,7 +74,6 @@ func printMessage(message string) {
 
 // getMovies godoc
 // @Description Get all movies from the database
-// @Accept json
 // @Produce json
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully get all movies"
 // @Router /movies/ [get]
@@ -110,7 +109,6 @@ func getMovies(writer http.ResponseWriter, reader *http.Request) {
 
 // getMovie godoc
 // @Description Get a movie by its movieid
-// @Accept json
 // @Produce json
 // @Param movieid path string true "Movie ID"
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully get a movie with the specified movieid"
@@ -193,7 +191,6 @@ func createMovie(writer http.ResponseWriter, reader *http.Request) {
 
 // deleteMovie godoc
 // @Description Delete movie based on movieid
-// @Accept json
 // @Produce json
 // @Param movieid path string true "Movie ID"
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully delete a movie with the specified movieid"
@@ -230,7 +227,6 @@ func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 
 // deleteAllMovies godoc
 // @Description Delete all movies from database
-// @Accept json
 // @Produce json
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Succesfully delete all movies"
 // @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to delete all movies"

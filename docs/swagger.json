@@ -101,9 +101,6 @@
         "/deletemovie/{movieid}": {
             "delete": {
                 "description": "Delete movie based on movieid",
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],
@@ -177,9 +174,6 @@
         "/deletemovies/": {
             "delete": {
                 "description": "Delete all movies from database",
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],
@@ -244,9 +238,6 @@
         "/getmovie/{movieid}/": {
             "get": {
                 "description": "Get a movie by its movieid",
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],
@@ -320,9 +311,6 @@
         "/movies/": {
             "get": {
                 "description": "Get all movies from the database",
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],

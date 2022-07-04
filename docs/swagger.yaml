@@ -80,8 +80,6 @@ paths:
               type: object
   /deletemovie/{movieid}:
     delete:
-      consumes:
-      - application/json
       description: Delete movie based on movieid
       parameters:
       - description: Movie ID
@@ -125,8 +123,6 @@ paths:
               type: object
   /deletemovies/:
     delete:
-      consumes:
-      - application/json
       description: Delete all movies from database
       produces:
       - application/json
@@ -163,8 +159,6 @@ paths:
               type: object
   /getmovie/{movieid}/:
     get:
-      consumes:
-      - application/json
       description: Get a movie by its movieid
       parameters:
       - description: Movie ID
@@ -208,8 +202,6 @@ paths:
               type: object
   /movies/:
     get:
-      consumes:
-      - application/json
       description: Get all movies from the database
       produces:
       - application/json
