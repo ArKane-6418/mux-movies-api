@@ -76,6 +76,7 @@ func printMessage(message string) {
 // @Description Get all movies from the database
 // @Produce json
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully get all movies"
+// @Failure 500 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to get all movies"
 // @Router /movies/ [get]
 func getMovies(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /movies")
@@ -85,7 +86,11 @@ func getMovies(writer http.ResponseWriter, reader *http.Request) {
 
 	rows, err := db.Query("SELECT * FROM movies")
 
-	checkErr(err)
+	if err != nil {
+		var response = JsonResponse{Type: "error", Message: "Failed to get all movies from the database"}
+		json.NewEncoder(writer).Encode(response)
+		return
+	}
 
 	var movies []Movie
 
@@ -112,7 +117,8 @@ func getMovies(writer http.ResponseWriter, reader *http.Request) {
 // @Produce json
 // @Param movieid path string true "Movie ID"
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully get a movie with the specified movieid"
-// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to get a movie with the specified movieid because no movie has that id"
+// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "movieid was not provided"
+// @Failure 404 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to get a movie with the specified movieid because no movie has that id"
 // @Router /getmovie/{movieid}/ [get]
 func getMovie(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /getmovie/{movieid}")
@@ -194,7 +200,8 @@ func createMovie(writer http.ResponseWriter, reader *http.Request) {
 // @Produce json
 // @Param movieid path string true "Movie ID"
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully delete a movie with the specified movieid"
-// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to delete a movie with the specified movieid because no movie has that id"
+// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "movieid was not provided"
+// @Failure 404 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to delete a movie with the specified movieid because no movie has that id"
 // @Router /deletemovie/{movieid} [delete]
 func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /deletemovie/{movieid}")
@@ -229,7 +236,7 @@ func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 // @Description Delete all movies from database
 // @Produce json
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Succesfully delete all movies"
-// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to delete all movies"
+// @Failure 500 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to delete all movies"
 // @Router /deletemovies/ [delete]
 func deleteAllMovies(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /deletemovies")
@@ -239,7 +246,11 @@ func deleteAllMovies(writer http.ResponseWriter, reader *http.Request) {
 
 	_, err := db.Exec("DELETE FROM movies")
 
-	checkErr(err)
+	if err != nil {
+		var response = JsonResponse{Type: "error", Message: "Failed to get all movies from the database"}
+		json.NewEncoder(writer).Encode(response)
+		return
+	}
 
 	printMessage("All movies have been deleted successfully!")
 

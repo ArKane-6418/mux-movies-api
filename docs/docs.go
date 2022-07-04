@@ -146,6 +146,33 @@ const docTemplate = `{
                         }
                     },
                     "400": {
+                        "description": "movieid was not provided",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/main.JsonResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/main.Movie"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
                         "description": "Failed to delete a movie with the specified movieid because no movie has that id",
                         "schema": {
                             "allOf": [
@@ -209,7 +236,7 @@ const docTemplate = `{
                             ]
                         }
                     },
-                    "400": {
+                    "500": {
                         "description": "Failed to delete all movies",
                         "schema": {
                             "allOf": [
@@ -283,6 +310,33 @@ const docTemplate = `{
                         }
                     },
                     "400": {
+                        "description": "movieid was not provided",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/main.JsonResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/main.Movie"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
                         "description": "Failed to get a movie with the specified movieid because no movie has that id",
                         "schema": {
                             "allOf": [
@@ -321,6 +375,33 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "Successfully get all movies",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/main.JsonResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/main.Movie"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to get all movies",
                         "schema": {
                             "allOf": [
                                 {
