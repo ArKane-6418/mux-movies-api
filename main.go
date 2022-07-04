@@ -76,7 +76,7 @@ func printMessage(message string) {
 // @Description Get all movies from the database
 // @Accept json
 // @Produce json
-// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string}
+// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully get all movies"
 // @Router /movies/ [get]
 func getMovies(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /movies")
@@ -113,8 +113,8 @@ func getMovies(writer http.ResponseWriter, reader *http.Request) {
 // @Accept json
 // @Produce json
 // @Param movieid path string true "Movie ID"
-// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string}
-// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string}
+// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully get a movie with the specified movieid"
+// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to get a movie with the specified movieid because no movie has that id"
 // @Router /getmovie/{movieid}/ [get]
 func getMovie(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /getmovie/{movieid}")
@@ -161,8 +161,8 @@ func getMovie(writer http.ResponseWriter, reader *http.Request) {
 // @Accept json
 // @Produce json
 // @Param movie body Movie true "Movie Data"
-// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string}
-// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string}
+// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully create a new movie with the specified movieid and moviename"
+// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to create a new movie because at least one of the parameters is missing"
 // @Router /addmovie/ [post]
 func createMovie(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /addmovie")
@@ -196,8 +196,8 @@ func createMovie(writer http.ResponseWriter, reader *http.Request) {
 // @Accept json
 // @Produce json
 // @Param movieid path string true "Movie ID"
-// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string}
-// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string}
+// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully delete a movie with the specified movieid"
+// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to delete a movie with the specified movieid because no movie has that id"
 // @Router /deletemovie/{movieid} [delete]
 func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /deletemovie/{movieid}")
@@ -232,8 +232,8 @@ func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 // @Description Delete all movies from database
 // @Accept json
 // @Produce json
-// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string}
-// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string}
+// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Succesfully delete all movies"
+// @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to delete all movies"
 // @Router /deletemovies/ [delete]
 func deleteAllMovies(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /deletemovies")

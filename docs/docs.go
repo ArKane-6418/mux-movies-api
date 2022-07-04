@@ -46,7 +46,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successfully create a new movie with the specified movieid and moviename",
                         "schema": {
                             "allOf": [
                                 {
@@ -73,7 +73,7 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "Bad Request",
+                        "description": "Failed to create a new movie because at least one of the parameters is missing",
                         "schema": {
                             "allOf": [
                                 {
@@ -122,7 +122,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successfully delete a movie with the specified movieid",
                         "schema": {
                             "allOf": [
                                 {
@@ -149,7 +149,7 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "Bad Request",
+                        "description": "Failed to delete a movie with the specified movieid because no movie has that id",
                         "schema": {
                             "allOf": [
                                 {
@@ -189,7 +189,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Succesfully delete all movies",
                         "schema": {
                             "allOf": [
                                 {
@@ -216,7 +216,7 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "Bad Request",
+                        "description": "Failed to delete all movies",
                         "schema": {
                             "allOf": [
                                 {
@@ -265,7 +265,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successfully get a movie with the specified movieid",
                         "schema": {
                             "allOf": [
                                 {
@@ -292,7 +292,7 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "Bad Request",
+                        "description": "Failed to get a movie with the specified movieid because no movie has that id",
                         "schema": {
                             "allOf": [
                                 {
@@ -332,7 +332,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successfully get all movies",
                         "schema": {
                             "allOf": [
                                 {
