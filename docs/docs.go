@@ -173,7 +173,7 @@ const docTemplate = `{
                         }
                     },
                     "404": {
-                        "description": "Failed to delete a movie with the specified movieid because no movie has that id",
+                        "description": "A movie with the specified movieid could not be found",
                         "schema": {
                             "allOf": [
                                 {
@@ -337,7 +337,7 @@ const docTemplate = `{
                         }
                     },
                     "404": {
-                        "description": "Failed to get a movie with the specified movieid because no movie has that id",
+                        "description": "A movie with the specified movieid could not be found",
                         "schema": {
                             "allOf": [
                                 {

@@ -118,7 +118,7 @@ func getMovies(writer http.ResponseWriter, reader *http.Request) {
 // @Param movieid path string true "Movie ID"
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully get a movie with the specified movieid"
 // @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "movieid was not provided"
-// @Failure 404 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to get a movie with the specified movieid because no movie has that id"
+// @Failure 404 {object} JsonResponse{type=string,data=[]Movie,message=string} "A movie with the specified movieid could not be found"
 // @Router /getmovie/{movieid}/ [get]
 func getMovie(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /getmovie/{movieid}")
@@ -201,7 +201,7 @@ func createMovie(writer http.ResponseWriter, reader *http.Request) {
 // @Param movieid path string true "Movie ID"
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully delete a movie with the specified movieid"
 // @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "movieid was not provided"
-// @Failure 404 {object} JsonResponse{type=string,data=[]Movie,message=string} "Failed to delete a movie with the specified movieid because no movie has that id"
+// @Failure 404 {object} JsonResponse{type=string,data=[]Movie,message=string} "A movie with the specified movieid could not be found"
 // @Router /deletemovie/{movieid} [delete]
 func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /deletemovie/{movieid}")
