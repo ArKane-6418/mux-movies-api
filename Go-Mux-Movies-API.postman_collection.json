@@ -66,6 +66,14 @@
 			"response": []
 		},
 		{
+			"name": "MovieID is not provided",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
 			"name": "Add a New Movie",
 			"request": {
 				"method": "POST",
