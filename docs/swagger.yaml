@@ -63,7 +63,7 @@ paths:
                   type: string
               type: object
         "400":
-          description: Failed to create a new movie because at least one of the parameters
+          description: Fail to create a new movie because at least one of the parameters
             is missing
           schema:
             allOf:
@@ -123,7 +123,7 @@ paths:
                   type: string
               type: object
         "500":
-          description: Failed to delete all movies
+          description: Fail to delete all movies
           schema:
             allOf:
             - $ref: '#/definitions/main.JsonResponse'
@@ -161,7 +161,7 @@ paths:
                   type: string
               type: object
         "400":
-          description: movieid was not provided
+          description: movieid is not provided
           schema:
             allOf:
             - $ref: '#/definitions/main.JsonResponse'
@@ -204,7 +204,7 @@ paths:
                   type: string
               type: object
         "500":
-          description: Failed to get all movies
+          description: Fail to get all movies
           schema:
             allOf:
             - $ref: '#/definitions/main.JsonResponse'

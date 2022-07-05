@@ -73,7 +73,7 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "Failed to create a new movie because at least one of the parameters is missing",
+                        "description": "Fail to create a new movie because at least one of the parameters is missing",
                         "schema": {
                             "allOf": [
                                 {
@@ -177,7 +177,7 @@ const docTemplate = `{
                         }
                     },
                     "500": {
-                        "description": "Failed to delete all movies",
+                        "description": "Fail to delete all movies",
                         "schema": {
                             "allOf": [
                                 {
@@ -244,7 +244,7 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "movieid was not provided",
+                        "description": "movieid is not provided",
                         "schema": {
                             "allOf": [
                                 {
@@ -323,7 +323,7 @@ const docTemplate = `{
                         }
                     },
                     "500": {
-                        "description": "Failed to get all movies",
+                        "description": "Fail to get all movies",
                         "schema": {
                             "allOf": [
                                 {
