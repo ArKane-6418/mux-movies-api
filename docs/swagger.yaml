@@ -92,10 +92,6 @@ paths:
             allOf:
             - $ref: '#/definitions/main.JsonResponse'
             - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/main.Movie'
-                  type: array
                 message:
                   type: string
                 type:
@@ -113,10 +109,6 @@ paths:
             allOf:
             - $ref: '#/definitions/main.JsonResponse'
             - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/main.Movie'
-                  type: array
                 message:
                   type: string
                 type:

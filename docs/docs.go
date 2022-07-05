@@ -122,12 +122,6 @@ const docTemplate = `{
                                 {
                                     "type": "object",
                                     "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/main.Movie"
-                                            }
-                                        },
                                         "message": {
                                             "type": "string"
                                         },
@@ -159,12 +153,6 @@ const docTemplate = `{
                                 {
                                     "type": "object",
                                     "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/main.Movie"
-                                            }
-                                        },
                                         "message": {
                                             "type": "string"
                                         },

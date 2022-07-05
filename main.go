@@ -210,7 +210,7 @@ func createMovie(writer http.ResponseWriter, reader *http.Request) {
 // @Description Delete movie based on movieid
 // @Produce json
 // @Param movieid path string true "Movie ID"
-// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully delete a movie with the specified movieid"
+// @Success 200 {object} JsonResponse{type=string,message=string} "Successfully delete a movie with the specified movieid"
 // @Router /deletemovie/{movieid}/ [delete]
 func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /deletemovie/{movieid}")
@@ -239,7 +239,7 @@ func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 // deleteAllMovies godoc
 // @Description Delete all movies from database
 // @Produce json
-// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Succesfully delete all movies"
+// @Success 200 {object} JsonResponse{type=string,message=string} "Succesfully delete all movies"
 // @Failure 500 {object} JsonResponse{type=string,message=string} "Fail to delete all movies"
 // @Router /deletemovies/ [delete]
 func deleteAllMovies(writer http.ResponseWriter, reader *http.Request) {
