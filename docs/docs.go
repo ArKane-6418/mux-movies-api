@@ -102,7 +102,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/deletemovie/{movieid}": {
+        "/deletemovie/{movieid}/": {
             "delete": {
                 "description": "Delete movie based on movieid",
                 "produces": [

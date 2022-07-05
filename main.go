@@ -130,7 +130,7 @@ func getMovie(writer http.ResponseWriter, reader *http.Request) {
 	var response = JsonResponse{}
 
 	// movieID must be provided
-	if movieID == "" {
+	if movieID == " " {
 		response = JsonResponse{Type: "error", Message: "You are missing the movieid parameter."}
 	} else {
 		db := setupDB()
@@ -202,7 +202,7 @@ func createMovie(writer http.ResponseWriter, reader *http.Request) {
 // @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully delete a movie with the specified movieid"
 // @Failure 400 {object} JsonResponse{type=string,data=[]Movie,message=string} "movieid was not provided"
 // @Failure 404 {object} JsonResponse{type=string,data=[]Movie,message=string} "A movie with the specified movieid could not be found"
-// @Router /deletemovie/{movieid} [delete]
+// @Router /deletemovie/{movieid}/ [delete]
 func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 	log.Println("Endpoint hit: /deletemovie/{movieid}")
 	// Get the map of route variables from the reader
@@ -213,7 +213,7 @@ func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 	var response = JsonResponse{}
 
 	// movieID must be provided
-	if movieID == "" {
+	if movieID == " " {
 		response = JsonResponse{Type: "error", Message: "You are missing the movieid parameter."}
 	} else {
 		db := setupDB()
