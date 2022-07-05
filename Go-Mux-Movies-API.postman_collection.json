@@ -87,7 +87,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"movieid\": \"5\",\r\n    \"moviename\": \"movie5\"\r\n}"
+					"raw": "{\r\n    \"movieid\": \"6\",\r\n    \"moviename\": \"movie6\"\r\n}"
 				},
 				"url": {
 					"raw": "http://{{HOST}}/addmovie/",
@@ -165,15 +165,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{HOST}}/deletemovie/4/",
+					"raw": "http://{{HOST}}/deletemovie/3",
 					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"path": [
 						"deletemovie",
-						"4",
-						""
+						"3"
 					]
 				}
 			},

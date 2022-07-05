@@ -41,7 +41,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Successfully create a new movie with the specified movieid and moviename",
                         "schema": {
                             "allOf": [

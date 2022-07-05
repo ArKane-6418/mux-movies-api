@@ -87,6 +87,7 @@ func getMovies(writer http.ResponseWriter, reader *http.Request) {
 	rows, err := db.Query("SELECT * FROM movies")
 
 	if err != nil {
+		writer.WriteHeader(http.StatusInternalServerError)
 		var response = JsonResponse{Type: "error", Message: "Failed to get all movies from the database"}
 		json.NewEncoder(writer).Encode(response)
 		return
@@ -131,6 +132,7 @@ func getMovie(writer http.ResponseWriter, reader *http.Request) {
 
 	// movieID must be provided
 	if movieID == " " {
+		writer.WriteHeader(http.StatusBadRequest)
 		response = JsonResponse{Type: "error", Message: "You are missing the movieid parameter."}
 	} else {
 		db := setupDB()
@@ -148,6 +150,7 @@ func getMovie(writer http.ResponseWriter, reader *http.Request) {
 		err := row.Scan(&id, &movieID, &movieName)
 
 		if err != nil {
+			writer.WriteHeader(http.StatusNotFound)
 			response = JsonResponse{Type: "failure", Message: "A movie with that movieid does not exist."}
 		} else {
 			movies = append(movies, Movie{MovieID: movieID, MovieName: movieName})
@@ -165,7 +168,7 @@ func getMovie(writer http.ResponseWriter, reader *http.Request) {
 // @Accept json
 // @Produce json
 // @Param movie body Movie true "Movie Data"
-// @Success 200 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully create a new movie with the specified movieid and moviename"
+// @Success 201 {object} JsonResponse{type=string,data=[]Movie,message=string} "Successfully create a new movie with the specified movieid and moviename"
 // @Failure 400 {object} JsonResponse{type=string,message=string} "Failed to create a new movie because at least one of the parameters is missing"
 // @Router /addmovie/ [post]
 func createMovie(writer http.ResponseWriter, reader *http.Request) {
@@ -180,6 +183,7 @@ func createMovie(writer http.ResponseWriter, reader *http.Request) {
 	var response = JsonResponse{}
 	// movieID and movieName must both be provided
 	if m.MovieID == "" || m.MovieName == "" {
+		writer.WriteHeader(http.StatusBadRequest)
 		response = JsonResponse{Type: "error", Message: "You are missing movieID or movieName"}
 	} else {
 		// Setup the DB and insert a new record
@@ -189,8 +193,15 @@ func createMovie(writer http.ResponseWriter, reader *http.Request) {
 		var lastInsertID int
 		// Execute the query and get the first (and only) row
 		err := db.QueryRow("INSERT INTO movies(movieid, moviename) VALUES($1, $2) RETURNING id", m.MovieID, m.MovieName).Scan(&lastInsertID)
-		checkErr(err)
-		response = JsonResponse{Type: "success", Message: "The movie has been inserted successfully!"}
+
+		if err != nil {
+			writer.WriteHeader(http.StatusInternalServerError)
+			response = JsonResponse{Type: "error", Message: "Failed to insert a new movie"}
+		} else {
+			writer.WriteHeader(http.StatusCreated)
+			response = JsonResponse{Type: "success", Message: "The movie has been inserted successfully!"}
+		}
+
 	}
 	json.NewEncoder(writer).Encode(response)
 }
@@ -210,21 +221,16 @@ func deleteMovie(writer http.ResponseWriter, reader *http.Request) {
 
 	var response = JsonResponse{}
 
-	// movieID must be provided
-	if movieID == " " {
-		response = JsonResponse{Type: "error", Message: "You are missing the movieid parameter."}
+	db := setupDB()
+	printMessage("Deleting movie from DB")
+
+	// Execute the query but don't return any rows
+	_, err := db.Exec("DELETE FROM movies WHERE movieid = $1", movieID)
+
+	if err != nil {
+		response = JsonResponse{Type: "failure", Message: "Failed to delete the specified movie."}
 	} else {
-		db := setupDB()
-		printMessage("Deleting movie from DB")
-
-		// Execute the query but don't return any rows
-		_, err := db.Exec("DELETE FROM movies WHERE movieid = $1", movieID)
-
-		if err != nil {
-			response = JsonResponse{Type: "failure", Message: "Failed to delete the specified movie."}
-		} else {
-			response = JsonResponse{Type: "success", Message: "The movie has been deleted successfully."}
-		}
+		response = JsonResponse{Type: "success", Message: "The movie has been deleted successfully."}
 	}
 
 	json.NewEncoder(writer).Encode(response)
@@ -245,6 +251,7 @@ func deleteAllMovies(writer http.ResponseWriter, reader *http.Request) {
 	_, err := db.Exec("DELETE FROM movies")
 
 	if err != nil {
+		writer.WriteHeader(http.StatusInternalServerError)
 		var response = JsonResponse{Type: "error", Message: "Failed to get all movies from the database"}
 		json.NewEncoder(writer).Encode(response)
 		return
