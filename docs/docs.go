@@ -145,33 +145,6 @@ const docTemplate = `{
                             ]
                         }
                     },
-                    "400": {
-                        "description": "movieid was not provided",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/main.JsonResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/main.Movie"
-                                            }
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
                     "404": {
                         "description": "A movie with the specified movieid could not be found",
                         "schema": {

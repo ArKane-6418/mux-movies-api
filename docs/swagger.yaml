@@ -105,21 +105,6 @@ paths:
                 type:
                   type: string
               type: object
-        "400":
-          description: movieid was not provided
-          schema:
-            allOf:
-            - $ref: '#/definitions/main.JsonResponse'
-            - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/main.Movie'
-                  type: array
-                message:
-                  type: string
-                type:
-                  type: string
-              type: object
         "404":
           description: A movie with the specified movieid could not be found
           schema:
